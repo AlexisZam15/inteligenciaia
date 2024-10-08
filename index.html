@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/iaicono.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/iaicono.png">
+    <title>Universidad Luis Vargas Torres - IA Clasificación</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-overlay">
+        <div class="loader">
+            <div class="university-loader">
+                <img src="ESCUDETO_UTE-LVT.png" alt="Loading..." class="loader-logo">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fab-container">
+        <button class="fab-button" onclick="toggleTheme()">
+            <i class="fas fa-adjust"></i>
+        </button>
+        <button class="fab-button" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="ESCUDETO_UTE-LVT.png" alt="Logo ULV Torres" class="navbar-logo pulse">
+                <span class="university-name">Universidad Tecnica Luis Vargas Torres Sede Santo Domingo</span>
+                
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle"></i> Acerca</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#demo"><i class="fas fa-camera"></i> Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="hero-title animate__animated animate__fadeInLeft">Inteligencia Artificial</h1>
+                    <p class="hero-subtitle animate__animated animate__fadeInLeft animate__delay-1s">Clasificación avanzada de imágenes mediante IA</p>
+                    <div class="sede-badge animate__animated animate__fadeInUp animate__delay-2s">
+                        <i class="fas fa-university"></i> Sede Santo Domingo
+                    </div>
+                    
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="LogotipoV2-Simple.png" alt="IA Logo" class="hero-image animate__animated animate__zoomIn">
+                </div>
+            </div>
+        </div>
+        <div class="hero-waves">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,186.7C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </header>
+    <center><img src="facilogo.jpg" alt="Logo ULV Torres" class="navbar-logofaci" style="width: 200px; height: auto;"></center>
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-brain"></i> Acerca del Proyecto</h2>
+            
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Tecnología de Punta</h3>
+                        <p>Utilizamos TensorFlow.js para procesamiento en tiempo real</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-camera"></i>
+                        <h3>Análisis en Vivo</h3>
+                        <p>Clasificación instantánea usando tu cámara web</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Proyecto Educativo</h3>
+                        <p>Desarrollado por estudiantes para estender como entrenar a una inteligencia artificial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-vial"></i> Demo en Vivo</h2>
+            <div class="camera-container">
+                <div class="video-wrapper">
+                    <video id="video" playsinline autoplay></video>
+                    <canvas id="canvas" width="400" height="400"></canvas>
+                    <canvas id="otrocanvas" width="150" height="150" style="display: none"></canvas>
+                </div>
+                <button class="btn-camera" id="cambiar-camara" onclick="cambiarCamara();">
+                    <i class="fas fa-camera-rotate"></i> Cambiar cámara
+                </button>
+                <div id="resultado" class="resultado-container">
+                    <div class="prediction-label">Predicción:</div>
+                    <div class="prediction-result"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Contactos</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
+                        <p>La Concordia, Santo Domingo, Ecuador</p>
+                        <h3><i class="fas fa-phone"></i> Teléfono</h3>
+                        <p> (593) 6 2726-300</p>
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p>investigacion@utelvt.edu.ec</p>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-university"></i> UTLVT</h5>
+                    <p>Universidad Tecnica Luis Vargas Torres<br>Sede Santo Domingo</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-link"></i> Enlaces Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> Acerca</a></li>
+                        <li><a href="#demo"><i class="fas fa-camera"></i> Demo</a></li>
+                        <li><a href="https://youtube.com/RingaTech"><i class="fab fa-youtube"></i> Canal YouTube</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-certificate"></i> Certificaciones</h5>
+                    <div class="certifications">
+                        <img src="https://via.placeholder.com/50" alt="Cert 1" class="cert-icon">
+                        <img src="https://via.placeholder.com/50" alt="Cert 2" class="cert-icon">
+                        <img src="https://via.placeholder.com/50" alt="Cert 3" class="cert-icon">
+                    </div>
+                    <p class="mt-3">
+                        <small>© 2024 UTLVT. Todos los derechos reservados.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+    <script>
+       window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-overlay').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+    </script>
+
+  <script type="text/javascript">
+
+
+
+    var tamano = 400;
+    var video = document.getElementById("video");
+    var canvas = document.getElementById("canvas");
+    var otrocanvas = document.getElementById("otrocanvas");
+    var ctx = canvas.getContext("2d");
+    var currentStream = null;
+    var facingMode = "user";
+
+    var modelo = null;
+
+    (async() => {
+      console.log("Cargando modelo...");
+      modelo = await tf.loadLayersModel("model.json");
+      console.log("Modelo cargado");
+    })();
+
+    window.onload = function() {
+      mostrarCamara();
+    }
+
+    function mostrarCamara() {
+      var opciones = {
+        audio: false,
+        video: {
+          width: tamano, height: tamano
+        }
+      }
+
+      if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(opciones)
+            .then(function(stream) {
+              currentStream = stream;
+              video.srcObject = currentStream;
+              procesarCamara();
+              predecir();
+            })
+            .catch(function(err) {
+              alert("No se pudo utilizar la camara :(");
+              console.log(err);
+              alert(err);
+            })
+      } else {
+        alert("No existe la funcion getUserMedia");
+      }
+    }
+
+    function cambiarCamara() {
+          if (currentStream) {
+              currentStream.getTracks().forEach(track => {
+                  track.stop();
+              });
+          }
+
+          facingMode = facingMode == "user" ? "environment" : "user";
+
+          var opciones = {
+              audio: false,
+              video: {
+                  facingMode: facingMode, width: tamano, height: tamano
+              }
+          };
+
+
+          navigator.mediaDevices.getUserMedia(opciones)
+              .then(function(stream) {
+                  currentStream = stream;
+                  video.srcObject = currentStream;
+              })
+              .catch(function(err) {
+                  console.log("Oops, hubo un error", err);
+              })
+      }
+
+    function procesarCamara() {
+      ctx.drawImage(video, 0, 0, tamano, tamano, 0, 0, tamano, tamano);
+      setTimeout(procesarCamara, 20);
+    }
+
+    function predecir() {
+      if (modelo != null) {
+        resample_single(canvas, 100, 100, otrocanvas);
+
+        //Hacer la predicción
+        var ctx2 = otrocanvas.getContext("2d");
+        var imgData = ctx2.getImageData(0,0, 100, 100);
+
+        var arr = [];
+        var arr100 = [];
+
+        for (var p=0; p < imgData.data.length; p+= 4) {
+          var rojo = imgData.data[p] / 255;
+          var verde = imgData.data[p+1] / 255;
+          var azul = imgData.data[p+2] / 255;
+
+          var gris = (rojo+verde+azul)/3;
+
+          arr100.push([gris]);
+          if (arr100.length == 100) {
+            arr.push(arr100);
+            arr100 = [];
+          }
+        }
+
+        arr = [arr];
+
+        var tensor = tf.tensor4d(arr);
+        var resultado = modelo.predict(tensor).dataSync();
+
+        var respuesta;
+        if (resultado <= .5) {
+          respuesta = "Gato";
+        } else {
+          respuesta = "Perro";
+        }
+        document.getElementById("resultado").innerHTML = respuesta;
+
+      }
+
+      setTimeout(predecir, 150);
+    }
+
+    /**
+       * Hermite resize - fast image resize/resample using Hermite filter. 1 cpu version!
+       * 
+       * @param {HtmlElement} canvas
+       * @param {int} width
+       * @param {int} height
+       * @param {boolean} resize_canvas if true, canvas will be resized. Optional.
+       * Cambiado por RT, resize canvas ahora es donde se pone el chiqitillllllo
+       */
+      function resample_single(canvas, width, height, resize_canvas) {
+          var width_source = canvas.width;
+          var height_source = canvas.height;
+          width = Math.round(width);
+          height = Math.round(height);
+
+          var ratio_w = width_source / width;
+          var ratio_h = height_source / height;
+          var ratio_w_half = Math.ceil(ratio_w / 2);
+          var ratio_h_half = Math.ceil(ratio_h / 2);
+
+          var ctx = canvas.getContext("2d");
+          var ctx2 = resize_canvas.getContext("2d");
+          var img = ctx.getImageData(0, 0, width_source, height_source);
+          var img2 = ctx2.createImageData(width, height);
+          var data = img.data;
+          var data2 = img2.data;
+
+          for (var j = 0; j < height; j++) {
+              for (var i = 0; i < width; i++) {
+                  var x2 = (i + j * width) * 4;
+                  var weight = 0;
+                  var weights = 0;
+                  var weights_alpha = 0;
+                  var gx_r = 0;
+                  var gx_g = 0;
+                  var gx_b = 0;
+                  var gx_a = 0;
+                  var center_y = (j + 0.5) * ratio_h;
+                  var yy_start = Math.floor(j * ratio_h);
+                  var yy_stop = Math.ceil((j + 1) * ratio_h);
+                  for (var yy = yy_start; yy < yy_stop; yy++) {
+                      var dy = Math.abs(center_y - (yy + 0.5)) / ratio_h_half;
+                      var center_x = (i + 0.5) * ratio_w;
+                      var w0 = dy * dy; //pre-calc part of w
+                      var xx_start = Math.floor(i * ratio_w);
+                      var xx_stop = Math.ceil((i + 1) * ratio_w);
+                      for (var xx = xx_start; xx < xx_stop; xx++) {
+                          var dx = Math.abs(center_x - (xx + 0.5)) / ratio_w_half;
+                          var w = Math.sqrt(w0 + dx * dx);
+                          if (w >= 1) {
+                              //pixel too far
+                              continue;
+                          }
+                          //hermite filter
+                          weight = 2 * w * w * w - 3 * w * w + 1;
+                          var pos_x = 4 * (xx + yy * width_source);
+                          //alpha
+                          gx_a += weight * data[pos_x + 3];
+                          weights_alpha += weight;
+                          //colors
+                          if (data[pos_x + 3] < 255)
+                              weight = weight * data[pos_x + 3] / 250;
+                          gx_r += weight * data[pos_x];
+                          gx_g += weight * data[pos_x + 1];
+                          gx_b += weight * data[pos_x + 2];
+                          weights += weight;
+                      }
+                  }
+                  data2[x2] = gx_r / weights;
+                  data2[x2 + 1] = gx_g / weights;
+                  data2[x2 + 2] = gx_b / weights;
+                  data2[x2 + 3] = gx_a / weights_alpha;
+              }
+          }
+
+
+          ctx2.putImageData(img2, 0, 0);
+      }
+  </script>
+  </body>
+</html>
